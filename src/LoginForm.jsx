@@ -1,10 +1,46 @@
 import { useState } from "react";
-import "../src/App.css"
+import "../src/App.css";
+
 const LoginForm = () => {
   const [isActive, setIsActive] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpName, setSignUpName] = useState("");
+
+  const handleSignIn = () => {
+    if (loginEmail && loginPassword) {
+      setMessage("Sign in successful!");
+      setLoginEmail(""); 
+      setLoginPassword(""); 
+
+      setTimeout(() => setMessage(""), 3000);
+    } else {
+      setMessage("⚠️ Please enter email and password!");
+      setTimeout(() => setMessage(""), 3000);
+    }
+  };
+
+  const handleSignUp = () => {
+    if (signUpName && signUpEmail && signUpPassword) {
+      setMessage("Sign-Up successful!");
+      setSignUpName("");
+      setSignUpEmail(""); 
+      setSignUpPassword(""); 
+
+      setTimeout(() => setMessage(""), 3000);
+    } else {
+      setMessage(" Please enter all fields!");
+      setTimeout(() => setMessage(""), 3000);
+    }
+  };
 
   return (
     <div className={`container ${isActive ? "active" : ""}`}>
+      
+      {message && <p className="success-message">{message}</p>}
       
       <div className="form-container sign-up">
         <form>
@@ -16,14 +52,31 @@ const LoginForm = () => {
             <a href="#" className="icons"><i className="bx bxl-linkedin"></i></a>
           </div>
           <span>Register with your email</span>
-          <input type="text" name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <input type="password" name="password" placeholder="Password" />
-          <button type="button">Sign Up</button>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={signUpName}
+            onChange={(e) => setSignUpName(e.target.value)}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={signUpEmail}
+            onChange={(e) => setSignUpEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={signUpPassword}
+            onChange={(e) => setSignUpPassword(e.target.value)}
+          />
+          <button type="button" onClick={handleSignUp}>Sign Up</button>
         </form>
       </div>
 
-      
       <div className="form-container sign-in">
         <form>
           <h1>Sign In</h1>
@@ -34,14 +87,25 @@ const LoginForm = () => {
             <a href="#" className="icons"><i className="bx bxl-linkedin"></i></a>
           </div>
           <span>Login with your email</span>
-          <input type="email" name="loginEmail" placeholder="Email" />
-          <input type="password" name="loginPassword" placeholder="Password" />
+          <input
+            type="email"
+            name="loginEmail"
+            placeholder="Email"
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            name="loginPassword"
+            placeholder="Password"
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
+          />
           <a href="#">Forgot Password?</a>
-          <button type="button">Sign In</button>
+          <button type="button" onClick={handleSignIn}>Sign In</button>
         </form>
       </div>
 
-      
       <div className="toggle-container">
         <div className="toggle">
           <div className="toggle-panel toggle-left">
