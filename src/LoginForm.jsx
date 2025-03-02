@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "../src/App.css"
-
 const LoginForm = () => {
   const [isActive, setIsActive] = useState(false);
 
